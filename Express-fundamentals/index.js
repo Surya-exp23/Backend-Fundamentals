@@ -42,6 +42,20 @@ app.put('/teas/:id',(req,res)=>{
         return res.status(404).send("Not found")
     }
     const {name,price} = req.body
+    tea.name=name
+    tea.price=price
+    res.send(200).send(tea)
+})
+
+
+//delete tea
+app.delete('/teas/:id',(req,res)=>{
+    const index = teaData.findIndex(t=>t.id === parseInt(req.params.id))
+    if(index== -1){
+        return res.status(404).send('tea not found')
+    }
+    teaData.splice(index,1)
+    return res.status(202).send('deleted')
 })
 
 
